@@ -1,5 +1,6 @@
 from utils import *
 import copy
+import sys
 
 def solve(grid):
     """
@@ -18,5 +19,13 @@ def solve(grid):
     display(values)
 
 if __name__ == '__main__':
-    grid = input('type sudoku as a long string of 81 characters with . as unsolved place\n')
-    solve(grid)
+    if len(sys.argv) != 2:
+        print("Expect the SUDOKU file name as the first input. Please mark empty places with a \'.\'")
+    else:
+        print("Reading from the file to solve the SUDOKU puzzle")
+        try:
+            with open(sys.argv[1], 'r') as file:
+                grid = file.read()
+                solve(grid)
+        except Exception as e:
+            print("An error occurred while processing the SUDOKU puzzle: " + str(e))
